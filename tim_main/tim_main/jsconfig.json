@@ -1,0 +1,10 @@
+{
+  "include": [
+    "*.js",
+    "libraries/*.js",
+    "scripts/*.js",
+    "scripts/objects/*.js",
+    "scripts/stages/*.js",
+    "/home/kosuke/.vscode-server/extensions/samplavigne.p5-vscode-1.2.6/p5types/global.d.ts"
+  ]
+}
