@@ -2,13 +2,15 @@ let Enemys_cnt = 0;
 let timerStart = 50;
 let time2 = 40;
 let time3 = 50;
-let time4 = 30;
-let time5 = 60;
+let time4 = 40;
+let time5 = 40;
 let timer = timerStart;
 let timer2 = time2;
 let timer3 = time3;
 let timer4 = time4;
 let timer5 = time5;
+
+let player_x, player_y;
 
 class GameManager {
   // ゲッター
@@ -24,18 +26,23 @@ class GameManager {
 
     this.stage = new Stage();
     if(stageNum == 2) {
+      timerStart = 50;
       this.stage = new Stage1();
       timer = timerStart;
     } else if(stageNum == 3) {
+      time2 = 40;
       this.stage = new Stage2();
       timer = time2;
     } else if(stageNum == 4) {
+      time3 = 50;
       this.stage = new Stage3();
       timer = time3;
     } else if(stageNum == 5) {
+      time4 = 40;
       this.stage = new Stage4();
       timer = time4;
     } else if(stageNum == 6) {
+      time5 = 40;
       this.stage = new Stage5();
       timer = time5;
     }
@@ -81,10 +88,16 @@ class GameManager {
         mode = CLEAR;
         stageNum = 1;
       }
-    } else if(this.status.isGameOver) {
+    } 
+    if(this.status.isGameOver) {
+      timerStart = 50;
       mode = GAMEOVER;
-      timer = timerStart;
+      this.initGame();
+      stageNum = 2;
+      Enemys_cnt = 0;
     }
+    player_x = this.player.get_player_x();
+    player_y = this.player.get_player_y();
   }
 
   // p5jsに認識させるkeyPressedメソッド
@@ -157,7 +170,10 @@ class Status {
   }
 
   get isGameOver() {
-    return this.timer <= 0;
+    if(this.timer <= 0) {
+      return true;
+    }
+    return false;
   }
 
   get isStageClear() {
@@ -183,6 +199,12 @@ class Status {
     if(frameCount % 60 == 0 && this.timer > 0) {
       this.timer--;
     }
+    //溶岩判定
+    if(lava_x < player_x && player_x < lava_x+lava_w && player_y <= 70 && frameCount % 60 ==0) {
+      this.timer--;
+    }
+
+    //トゲ判定
   }
 
   display() {

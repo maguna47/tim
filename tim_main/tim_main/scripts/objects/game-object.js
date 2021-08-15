@@ -17,9 +17,24 @@ class GameObject {
     this.y = obj.topY;
     if(obj.constructor == MoveBlock) {
       this.dy = obj.step;
+      if(obj.step <= 0) {
+        this.y = obj.topY;
+      }
     } else {
       this.dy = 0;
     }
+    count = 0;
+  }
+
+  down(obj) {
+    this.y = obj.bottomY-50*(3/4);
+    /*if(obj.constructor == MoveBlock) {
+      this.dy = obj.step;
+      if(obj.step <= 0) {
+        this.y = obj.topY;
+      }
+    } else {*/
+      this.dy = 0;
   }
 
   // objにぶつかっている(貫通しない)
@@ -40,6 +55,7 @@ class GameObject {
       if (GameObject.isLanding(obj, stage.objs[i])) {
         obj.land(stage.objs[i]);
       }
+
       if(GameObject.isRighttouch(obj, stage.objs[i])) {
         obj.touchRight(stage.objs[i]);
       }

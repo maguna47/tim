@@ -26,5 +26,6 @@ class GameOver {
   
     mouseClicked() {
       mode = HOME;
+      timer = 50;
     }
 }

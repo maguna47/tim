@@ -16,7 +16,7 @@ class Stage1 extends Stage {
     this.moveBlock2 = this.createObj(MoveBlock, 600, 400, 50, 10, /*limit =*/100, 0);
 
     //this.Spike1 = this.createObj(Spike, 225, 100);
-    this.Spike2 = this.createObj(Spike, 150, 0);
+    //this.Spike2 = this.createObj(Spike, 150, 0);
 
     this.Lava1 = this.createObj(Lava, 600, 0, 200);
 

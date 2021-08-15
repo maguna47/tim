@@ -3,6 +3,10 @@ class Block extends GameObject {
     super(x, y);
     this.w = w;
     this.h = h;
+    lava_w = -10;
+    lava_x = -10;
+    S_x = -10;
+    S_w = -10;
   }
 
   display() {
@@ -16,7 +20,7 @@ class Block extends GameObject {
   }
 }
 
-class MoveBlock extends Block {
+class MoveBlock extends GameObject {
   constructor(x, y, moveW, moveH, limit, judge) {
     super(x, y);
     this.w = moveW;
@@ -63,6 +67,7 @@ class MoveBlock extends Block {
   }
 }
 
+let S_x, S_w;
 class Spike extends GameObject {
   constructor(x, y) {
     super();
@@ -77,8 +82,14 @@ class Spike extends GameObject {
     fill(0);
     triangle(this.x, this.y, this.x+this.w, this.y, this.x+this.w/2, this.y+this.h);
   }
+
+  update() {
+    S_x = this.x;
+    S_w = this.y;
+  }
 }
 
+let lava_x, lava_w;
 class Lava extends GameObject {
   constructor(x, y, w) {
     super();
@@ -91,6 +102,11 @@ class Lava extends GameObject {
   display() {
     fill(200, 0, 0);
     rect(this.x, this.y, this.w, this.h);
+  }
+
+  update() {
+    lava_x = this.x;
+    lava_w = this.w;
   }
 
   /*inLava() {

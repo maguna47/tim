@@ -5,6 +5,8 @@ var shot_size = 10;
 
 var in_Lava = false;
 
+let count = 0;
+
 class Player extends GameObject {
   constructor(x, y) {
     super(x, y);
@@ -14,7 +16,7 @@ class Player extends GameObject {
     this.dy = 0; // y方向の速さ
     this.g = 1; // 重力加速度
 
-    this.count = 0;
+    this.jframe = 0;
 
     this.next_alive_shot_num = 0;　//次に打つ弾の番号
     //this.shot_x=new Array(10);  //打つ弾のx座標
@@ -89,19 +91,25 @@ class Player extends GameObject {
   // ジャンプ
   jump() {
     this.dy += 17;
+    count++;
   }
 
   // p5jsに認識させるkeyPressedメソッド
   keyPressed() {
     // wでジャンプ
     if (keyCode === 87 || keyCode == UP_ARROW) {
-      this.jump();  
+      this.jframe = 0;
+      if(count == 0) {
+        this.jump();
+      }
     }
+    //if ((frameCount-this.jframe) % 20 <= 10) {
+      //this.count = 0;
+    //}
     //スペースで射撃
     if(keyCode == 32) {
       this.shoot();
     }
-
   }
 
   //弾の生成
@@ -142,4 +150,15 @@ class Player extends GameObject {
     }
   }
 
+  lava_now() {
+    if(lava_x < this.x && this.x < lava_x+lava_w && this.y <= 100) {
+      timer -= 10;
+    }
+  }
+  get_player_x(){ 
+    return this.x;
+  }
+  get_player_y() {
+    return this.y;
+  }
 }

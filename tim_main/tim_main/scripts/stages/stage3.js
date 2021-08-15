@@ -18,5 +18,7 @@ class Stage3 extends Stage {
       this.enemy3 = this.createObj(Enemy, 950, 50);
       this.enemy4 = this.createObj(Enemy, 970, random(300, 500));
 
+      this.Lava1 = this.createObj(Lava, 300, 0, 400);
+
     }
   }
